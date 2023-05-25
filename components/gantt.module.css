@@ -1,0 +1,102 @@
+.container {
+    max-width: 3600px;
+    min-width: 800px;
+    margin: 0 auto;
+    padding: 50px;
+}
+
+.chart {
+    display: grid;
+    border: 2px solid #000;
+    position: relative;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.chartRow {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    background-color: #DCDCDC;
+    width:100%;
+}
+
+/* draw header */
+.headerRow {
+    position: sticky;
+    left:0;
+    color: #fff;
+    background-color: #708090 !important;
+    border-bottom: 2px solid #000;
+    /* grid-template-columns: 50px repeat(6, 1fr); */
+}
+
+.headerRow>span {
+    text-align: center;
+    font-size: 13px;
+    align-self: center;
+    font-weight: bold;
+    padding: 15px 0;
+}
+
+.headerCol {
+    display: inline-block;
+    position: sticky;
+    left:0;
+    z-index: 99;
+    background-color: #808080;
+    border: 1px solid #000;
+    border-top: 0;
+    border-left: 0;
+    padding: 20px 0;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* draw lines*/
+.chartLines {
+    position: absolute;
+    height: 100%;
+    background-color: transparent;
+    /* grid-template-columns: 50px repeat(6, 1fr); */
+}
+
+.chartLines>span {
+    display: block;
+    border-right: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+/* draw bar */
+.chartBars {
+    list-style: none;
+    display: grid;
+    padding: 15px 0;
+    margin: 0;
+    /* grid-template-columns: repeat(6, 1fr); */
+    grid-gap: 10px 0;
+    border-bottom: 1px solid #000;
+}
+
+.chartRow>.chartBar {
+    list-style: none;
+    display: grid;
+    padding: 15px 0;
+    margin: 0;
+    /* grid-template-columns: repeat(6, 1fr); */
+    grid-gap: 10px 0;
+    border-bottom: 1px solid #000;
+}
+
+.chartBar {
+    font-weight: 450;
+    text-align: left;
+    font-size: 15px;
+    min-height: 15px;
+    background-color: #708090;
+    padding: 5px 15px;
+    color: #fff;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    border-radius: 15px;
+}

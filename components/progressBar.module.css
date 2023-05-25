@@ -1,0 +1,64 @@
+
+.container {
+    width: 100%;
+    height: 100%;
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.progressbar {
+    position: relative;
+    max-width: 500px;
+    width: 250px;
+    /* margin: 30px auto 0; */
+    margin-right: 30px;
+    height: 30px;
+    /* background: #274545; */
+    overflow: hidden;
+}
+
+.green .progressbar{
+    background: #192d2d;
+}
+
+.red .progressbar{
+    background: #452727;
+}
+
+.progressMax {
+    position: absolute;
+    height: 30px;
+}
+
+span.progress {
+    position: absolute;
+    display: inline-block;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    /* background: #326666; */
+    /* transition: all 2s; */
+    animation-duration: 2s;
+    animation-name: changeWidth;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+.green span.progress {
+    background: #6a9e9e;   
+}
+
+.red span.progress {
+    background: #8d5555;   
+}
+
+@keyframes changeWidth {
+    from {width: 0;}
+    to {width: 100%;}
+}
