@@ -65,14 +65,6 @@ export default function ProgressTable(props) {
                         to={addYear(issueDate, parseInt(visaType))} />
                     <TableRow rule="ILR" from={countingDate} to={addYear(countingDate, 5)} />
                     <TableRow rule="CITIZENSHIP" from={addYear(countingDate, 5)} to={addYear(countingDate, 6)} />
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <ProgressBar value={75} />
-                        </td>
-                    </tr>
                 </tbody>
                     <QuotaTable
                     countingDateState={props.countingDateState}

@@ -79,12 +79,6 @@ export default function QuotaTable(props) {
                 <TableRow rule="ILR-ROLLING" iter="5" quota="180" from={countingDate} />
                 {/* <TableRow rule="Citizenship-1Y" iter="1" quota="90" from={addYear(countingDate, 5)} />
                         <TableRow rule="Citizenship-5Y" iter="1" quota="450" from={countingDate} /> */}
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><ProgressBar value="80" color="red" /></td>
-                </tr>
             </tbody>
         </>
     )
