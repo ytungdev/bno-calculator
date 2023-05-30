@@ -21,7 +21,7 @@ export default function ProgressTable(props) {
         const total = dateDiff(to, from)
         const filled = dateDiff(new Date(), from)
         const frac = Math.ceil(filled / total * 100)
-        // console.log(rule, from, to, total, filled, frac)
+        console.log(rule, from, to, total, filled, frac)
         return (
             <tr>
                 <td>{rule}</td>

@@ -14,15 +14,18 @@ export default function TripForm(props) {
     const enteringDateRef = React.useRef();
     const issueDateRef = React.useRef();
     const countingDateRef = React.useRef();
+    const visaTypeRef = React.useRef();
 
     function handleSubmit(e) {
         // Prevent the browser from reloading the page
         const newIssueDate = issueDateRef.current.value
         const newEnteringDate = enteringDateRef.current.value
+        const newVisaType = visaTypeRef.current.value
         // setEnteringDate(newEnteringDate);
         // setIssueDate(newIssueDate);
         setIssueDate(newIssueDate)
         setEnteringDate(newEnteringDate);
+        setVisaType(newVisaType);
         console.log(`submit : ${newIssueDate} | ${newEnteringDate}`)
         let diff = dateDiff(newEnteringDate, newIssueDate)
         if (diff >= 180){
@@ -87,7 +90,7 @@ export default function TripForm(props) {
                         <span className={styles.labelSpan}>Visa type : </span>
                         <select name="type"
                             defaultValue={visaType}
-                            onChange={e => setVisaType(e.target.value)}
+                            ref={visaTypeRef}
                         >
                             <option value='5'>5 years</option>
                             <option value='2.5'>2 years and 6 months</option>
