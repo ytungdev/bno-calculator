@@ -2,20 +2,12 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
-import { getTrips } from '../services/TripService'
+import { useAuthContext } from '../hooks/useAuthConext';
+import signIn from '../firebase/auth/login';
 
-
-export async function getStaticProps() {
-    const data = await getTrips();
-    const tripData = data
-    return {
-        props: {
-            tripData,
-        },
-    };
-}
 
 export default function Home({ tripData }) {
+    const { user } = useAuthContext()
     return (
         <Layout home>
             <Head>
@@ -29,23 +21,13 @@ export default function Home({ tripData }) {
                     Aenean in dui blandit, viverra ex sed, elementum purus. Nunc suscipit sapien id ullamcorper laoreet. Sed a sapien malesuada, pharetra libero id, porta purus. Nunc laoreet ac purus ac ultricies. Pellentesque blandit facilisis.
                 </p>
             </section>
-            <Link href="/bno/calculator">
-                calculator
-            </Link>
-            <section>
-                <h2 className={utilStyles.headingLg}>Trips</h2>
-                <ul className={utilStyles.list}>
-                    {tripData.map(({ id, action, from, to, destination }) => (
-                        <li className={utilStyles.listItem} key={id}>
-                            {action}
-                            <br />
-                            {from} - {to}
-                            <br />
-                            {destination.country}, {destination.city}
-                        </li>
-                    ))}
-                </ul>
-            </section>
+
+            {(
+                user ?
+                    <Link href="/bno/calculator">calculator</Link>
+                    :
+                    <input type='button' id="signin-btn" value="Sign-in" onClick={signIn} />
+            )}
         </Layout>
     );
 }

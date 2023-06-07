@@ -6,6 +6,7 @@ import TripList from '../../components/tripList';
 import Gantt from '../../components/gantt';
 import ProgressTable from '../../components/progressTable';
 import QuotaTable from '../../components/quotaTable';
+import Protected from '../../components/protected';
 
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 
@@ -34,42 +35,44 @@ export default function calculatorPage(props) {
 
 
     return (
-        <Layout>
-            <h1>5 + 1 calculator</h1>
-            <TripForm
-                issueDateState={issueDateState}
-                enteringDateState={enteringDateState}
-                countingDateState={countingDateState}
-                visaTypeState={visaTypeState}
-                formStepState={formStepState}
-                daysAway0={daysAway0}
-            />
-            <hr />
-            <ProgressTable
-                countingDateState={countingDateState}
-                issueDateState={issueDateState}
-                visaTypeState={visaTypeState}
-                data={props.tripData} />
-            <Gantt
-                from={'2022-01-01'}
-                to={'2028-12-31'}
-                countingDateState={countingDateState}
-                issueDateState={issueDateState}
-                visaTypeState={visaTypeState}
-                data={props.tripData}
-            />
-            <TripList
-                items={props.tripData}
-                renderItem={(trip) =>
-                    <li className={utilStyles.listItem} key={trip.id}>
-                        {trip.action}
-                        <br />
-                        {trip.from} - {trip.to}
-                        <br />
-                        {trip.destination.country}, {trip.destination.city}
-                    </li>
-                }
-            />
-        </Layout>
+            <Layout>
+                <Protected>
+                    <h1>5 + 1 calculator</h1>
+                    <TripForm
+                        issueDateState={issueDateState}
+                        enteringDateState={enteringDateState}
+                        countingDateState={countingDateState}
+                        visaTypeState={visaTypeState}
+                        formStepState={formStepState}
+                        daysAway0={daysAway0}
+                    />
+                    <hr />
+                    <ProgressTable
+                        countingDateState={countingDateState}
+                        issueDateState={issueDateState}
+                        visaTypeState={visaTypeState}
+                        data={props.tripData} />
+                    <Gantt
+                        from={'2022-01-01'}
+                        to={'2028-12-31'}
+                        countingDateState={countingDateState}
+                        issueDateState={issueDateState}
+                        visaTypeState={visaTypeState}
+                        data={props.tripData}
+                    />
+                    <TripList
+                        items={props.tripData}
+                        renderItem={(trip) =>
+                            <li className={utilStyles.listItem} key={trip.id}>
+                                {trip.action}
+                                <br />
+                                {trip.from} - {trip.to}
+                                <br />
+                                {trip.destination.country}, {trip.destination.city}
+                            </li>
+                        }
+                    />
+                </Protected>
+            </Layout>
     );
 }

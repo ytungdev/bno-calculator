@@ -4,10 +4,29 @@ import styles from './layout.module.css';
 import utilStyles from '../styles/utils.module.css';
 import Link from 'next/link';
 
-const name = 'YT';
+
+import { useAuthContext } from '../hooks/useAuthConext'
+import logout from '../firebase/auth/logout';
+
+
 export const siteTitle = 'Next.js Sample Website';
 
+
 export default function Layout({ children, home }) {
+  const { user, setUser } = useAuthContext();
+  // console.log(`layout :`)
+  // console.log(user)
+
+  let profile = {
+    icon: "/images/profile.jpg",
+    username: ' '
+  }
+
+  if (user) {
+    profile.icon = user.photoURL
+    profile.username = user.displayName
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -28,42 +47,44 @@ export default function Layout({ children, home }) {
       <header className={styles.header}>
         {home ? (
           <>
-            <Image
-              priority
-              src="/images/sample.jpg"
+            <Image priority
+              src={profile.icon}
               className={utilStyles.borderCircle}
-              height={144}
-              width={144}
-              alt=""
+              height={144} width={144} alt=""
             />
-            <h1 className={utilStyles.heading2Xl}>{name}</h1>
+            <h1 className={utilStyles.heading2Xl}>
+              {profile.username}
+            </h1>
           </>
         ) : (
           <>
-            <Link href="/">
-              <Image
-                priority
-                src="/images/sample.jpg"
-                className={utilStyles.borderCircle}
-                height={108}
-                width={108}
-                alt=""
-              />
-            </Link>
+            <Image priority
+              src={profile.icon}
+              className={utilStyles.borderCircle}
+              height={108} width={108} alt=""
+            />
             <h2 className={utilStyles.headingLg}>
-              <Link href="/" className={utilStyles.colorInherit}>
-                {name}
-              </Link>
+              {profile.username}
             </h2>
           </>
         )}
       </header>
       <main>{children}</main>
+
       {!home && (
         <div className={styles.backToHome}>
           <Link href="/">← Back to home</Link>
         </div>
       )}
+      <section id="signin">
+        {(
+          user ?
+            <input type='button' id="signin-btn" value="Sign-out" onClick={logout} />
+            :
+            <></>
+        )}
+      </section>
     </div>
+
   );
 }
