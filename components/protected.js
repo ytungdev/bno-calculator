@@ -1,4 +1,4 @@
-import { useAuthContext } from '../hooks/useAuthConext'
+import { useAuthContext } from '../hooks/useAuthContext'
 import signIn from '../firebase/auth/login';
 
 

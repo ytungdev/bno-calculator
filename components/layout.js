@@ -5,7 +5,7 @@ import utilStyles from '../styles/utils.module.css';
 import Link from 'next/link';
 
 
-import { useAuthContext } from '../hooks/useAuthConext'
+import { useAuthContext } from '../hooks/useAuthContext'
 import logout from '../firebase/auth/logout';
 
 
