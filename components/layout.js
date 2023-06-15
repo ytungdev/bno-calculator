@@ -23,8 +23,8 @@ export default function Layout({ children, home }) {
   }
 
   if (user) {
-    profile.icon = user.photoURL
-    profile.username = user.displayName
+    profile.icon = user.google.photoURL
+    profile.username = user.google.displayName
   }
 
   return (

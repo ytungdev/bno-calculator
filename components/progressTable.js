@@ -1,14 +1,17 @@
 import React from "react";
-import { dateDiff, monthDiff, dateToISO, addYear } from '../ultility'
+import { dateDiff, monthDiff, dateToISO, addYear, addMonths } from '../ultility'
 import styles from './progressTAble.module.css'
 import utilStyles from '../styles/utils.module.css';
-import QuotaTable from "./quotaTable";
+import QuotaTable from "./quotaTableRows";
+
+import { useAuthContext } from "../hooks/useAuthContext";
 
 export default function ProgressTable(props) {
-    const [issueDate, setIssueDate] = props.issueDateState
-    const [countingDate, setCountingDate] = props.countingDateState
-    const [visaType, setVisaType] = props.visaTypeState
-    const tripData = props.data
+    const { user, setUser } = useAuthContext()
+    const issueDate = user.visa.issueDate
+    const visaType =  user.visa.type
+    const countingDate = user.ilr.countingDate
+    const trips = user.trips
 
     const issueDateD = new Date(issueDate);
     const countingDateD = new Date(countingDate);
@@ -33,11 +36,11 @@ export default function ProgressTable(props) {
         )
     }
 
-    const ProgressBar = ({value}) => {
+    const ProgressBar = ({ value }) => {
         return (
             <div className={styles.container}>
                 <div className={styles.progressbar}>
-                    <div className={styles.progressMax} style={{ width : `${value}%` }}>
+                    <div className={styles.progressMax} style={{ width: `${value}%` }}>
                         <span className={styles.progress}></span>
                     </div>
                 </div>
@@ -46,10 +49,9 @@ export default function ProgressTable(props) {
         )
     }
 
-    return (
-        <>
-        <div className={utilStyles.card}>
-            <table className={styles.table}>
+    const ProgressTableRows = () => {
+        return (
+            <>
                 <thead>
                     <tr className={styles.pth}>
                         <th></th>
@@ -60,19 +62,35 @@ export default function ProgressTable(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    <TableRow rule="VISA"
-                        from={issueDate}
-                        to={addYear(issueDate, parseInt(visaType))} />
-                    <TableRow rule="ILR" from={countingDate} to={addYear(countingDate, 5)} />
-                    <TableRow rule="CITIZENSHIP" from={addYear(countingDate, 5)} to={addYear(countingDate, 6)} />
+                    {
+                        parseInt(visaType) == 5 ?
+                        <TableRow rule="VISA" from={issueDate} to={addMonths({date:issueDate, y:5})} />
+                        :
+                        <TableRow rule="VISA" from={issueDate} to={addMonths({date:issueDate, y:2, m:6})} />
+                    }
+                    <TableRow rule="ILR" from={countingDate} to={addMonths({date:countingDate, y:5})} />
+                    <TableRow rule="CITIZENSHIP" from={addMonths({date:countingDate, y:5})} to={addMonths({date:countingDate, y:6})} />
                 </tbody>
-                    <QuotaTable
-                    countingDateState={props.countingDateState}
-                    issueDateState={props.issueDateState}
-                    visaTypeState={props.visaTypeState}
-                    daysAway0={props.daysAway0}
-                    data={tripData} />
-            </table>
+            </>
+        )
+    }
+
+    if(!user.initiated){
+        return(<></>)
+    }
+
+    return (
+        <>
+            <div className={utilStyles.card}>
+                <table className={styles.table}>
+                    <ProgressTableRows />
+                    {/* <QuotaTable
+                        countingDateState={props.countingDateState}
+                        issueDateState={props.issueDateState}
+                        visaTypeState={props.visaTypeState}
+                        daysAway0={props.daysAway0}
+                        data={trips} /> */}
+                </table>
             </div>
         </>
     )

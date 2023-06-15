@@ -2,7 +2,7 @@ import db from '../../firebase/db';
 
 export default async (req, res) => {
   try {
-    const entries = await db.collection('entries').orderBy('created').get();
+    const entries = await db.collection('users').get();
     const entriesData = entries.docs.map(entry => ({
       id: entry.id,
       ...entry.data()

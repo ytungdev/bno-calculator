@@ -43,17 +43,18 @@ export function dateToISO(d) {
     ].join('-');
 }
 
-export function addYear(d, n){
-    if (typeof d === 'string' || d instanceof String) {
-        d = new Date(d)
-        d.setFullYear(d.getFullYear() + n);
-        return dateToISO(d)
+export function addMonths({date, m=0, y=0}){
+    const total = y*12+m
+    if (typeof date === 'string' || date instanceof String) {
+        date = new Date(date)
+        date.setMonth(date.getMonth() + total);
+        return dateToISO(date)
     }
-    if (typeof d === 'undefined'){
+    if (typeof date === 'undefined'){
         return ''
     }
-    d.setFullYear(d.getFullYear() + n);
-    return d
+    date.getMonth(date.getMonth() + total);
+    return date
 }
 
 export function overlapDays(b_start,b_end, t_start,t_end){

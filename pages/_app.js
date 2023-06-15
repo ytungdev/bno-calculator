@@ -1,6 +1,6 @@
 import '../styles/globals.css'
 
-import { AuthContextProvider } from "../hooks/useAuthConext";
+import { AuthContextProvider } from "../hooks/useAuthContext";
 
 
 function MyApp({ Component, pageProps }) {
