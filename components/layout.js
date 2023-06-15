@@ -50,7 +50,7 @@ export default function Layout({ children, home }) {
             <Image priority
               src={profile.icon}
               className={utilStyles.borderCircle}
-              height={144} width={144} alt=""
+              height={96} width={96} alt=""
             />
             <h1 className={utilStyles.heading2Xl}>
               {profile.username}
@@ -61,7 +61,7 @@ export default function Layout({ children, home }) {
             <Image priority
               src={profile.icon}
               className={utilStyles.borderCircle}
-              height={108} width={108} alt=""
+              height={64} width={64} alt=""
             />
             <h2 className={utilStyles.headingLg}>
               {profile.username}

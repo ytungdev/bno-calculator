@@ -44,6 +44,9 @@ export default class AppUser {
             }
             if ('trips' in result){
                 this.trips = result.trips
+                this.trips.map((t)=>{
+                    t.created_at = t.created_at.toDate()
+                })
             }
             return true
         } catch (e) {

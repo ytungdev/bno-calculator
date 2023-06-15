@@ -21,8 +21,8 @@ export const AuthContextProvider = ({children}) => {
             if (guser) {
                 appUser = new AppUser(guser)
                 const {result, error} = await appUser.fetch()
+                //destructure AppUser class for setState
                 setUser({...appUser});
-                console.log(result, error)
             } else {
                 setUser(null);
             }

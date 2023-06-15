@@ -5,7 +5,9 @@ import Layout from '../../components/layout';
 import TripForm from '../../components/tripForm';
 import TripList from '../../components/tripList';
 import Gantt from '../../components/gantt';
-import ProgressTable from '../../components/progressTable';
+
+import TrackingTable from '../../components/trackingTable';
+import ProgressTable from '../../components/progressTableRows';
 import QuotaTable from '../../components/quotaTableRows';
 
 import utilStyles from '../../styles/utils.module.css';
@@ -37,21 +39,8 @@ export default function calculatorPage(props) {
                 <h1>5 + 1 calculator</h1>
                 <TripForm />
                 <hr />
-                <ProgressTable />
-
-                {/* <TripList
-                    items={props.tripData}
-                    renderItem={(trip) =>
-                        <div key={trip.id}>
-                            <p className={utilStyles.listItem}>
-                                {trip.from_date} - {trip.to_date}
-                                <br />
-                                {trip.destination}
-                            </p>
-                        </div>
-
-                    }
-                /> */}
+                <TrackingTable />
+                <TripList />
             </Protected>
         </Layout>
     );

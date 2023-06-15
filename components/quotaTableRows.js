@@ -1,37 +1,32 @@
 import React from "react";
-import { dateDiff, monthDiff, dateToISO, addYear, overlapDays } from '../ultility'
-import styles from './quotaTable.module.css'
-import utilStyles from '../styles/utils.module.css';
+import { dateDiff, monthDiff, dateToISO, overlapDays, addMonths } from '../ultility'
+
+import { useAuthContext } from "../hooks/useAuthContext";
 
 import ProgressBar from "./progressBar";
 
-export default function QuotaTable(props) {
-    const [issueDate, setIssueDate] = props.issueDateState
-    const [countingDate, setCountingDate] = props.countingDateState
-    const [visaType, setVisaType] = props.visaTypeState
-    const tripData = props.data
-
-    const issueDateD = new Date(issueDate);
-    const countingDateD = new Date(countingDate);
-    let visaEndD = new Date(issueDateD.getTime());
-    visaEndD.setFullYear(issueDateD.getFullYear() + parseInt(visaType));
-    let visaEnd = dateToISO(visaEndD)
+export default function QuotaTableRows(props) {
+    const { user, setUser } = useAuthContext()
+    const countingDate = user.ilr.countingDate
+    const trips = user.trips
+    console.log(trips)
 
     function format(data) {
         let tripDates = []
+        tripDates.push({from:user.ilr.countingDate, to:user.ilr.enteringDate})
         data.forEach(trip => {
-            tripDates.push({ from: trip.from, to: trip.to })
+            tripDates.push({ from: trip.from_date, to: trip.to_date })
         });
         return tripDates
     }
-    let tripDates = format(tripData)
-    // console.log(tripDates)
+    let tripDates = format(trips)
+    console.log(tripDates)
 
-    const TableRow = ({ rule, iter, quota, from }) => {
+    const TableRow = ({ rule, iter, quota, from, span=1 }) => {
         let result = []
         for (let i = 0; i < iter; i++) {
-            const fromD = new Date(addYear(from, i))
-            const toD = new Date(addYear(from, i + 1))
+            const fromD = new Date(addMonths({date:from, y:i}))
+            const toD = new Date(addMonths({date:from, y:i + span}))
             const total = quota
             let filled = 0
 
@@ -50,10 +45,17 @@ export default function QuotaTable(props) {
             const frac = Math.ceil(filled / total * 100)
             // console.log(total, filled, frac)
 
+            let th;
+            if (i==0){
+                th = <td rowSpan={iter}>{rule}</td>
+            } else {
+                th = ''
+            }
 
             result.push(
                 <tr key={i}>
-                    <td>{rule}{iter > 1 ? `: yr${i + 1}` : ''}</td>
+                    {/* <td>{rule}{iter > 1 ? `: yr${i + 1}` : ''}</td> */}
+                    {th}
                     <td>{dateToISO(fromD)}</td>
                     <td>{dateToISO(toD)}</td>
                     <td><ProgressBar value={frac.toString()} color="red" /></td>
@@ -66,19 +68,10 @@ export default function QuotaTable(props) {
 
     return (
         <>
-            <thead>
-                <tr className={styles.qth}>
-                    <th></th>
-                    <th>start</th>
-                    <th>end</th>
-                    <th>quota</th>
-                    <th>stat</th>
-                </tr>
-            </thead>
             <tbody>
                 <TableRow rule="ILR-ROLLING" iter="5" quota="180" from={countingDate} />
-                {/* <TableRow rule="Citizenship-1Y" iter="1" quota="90" from={addYear(countingDate, 5)} />
-                        <TableRow rule="Citizenship-5Y" iter="1" quota="450" from={countingDate} /> */}
+                <TableRow rule="Citizenship-1Y" iter="1" quota="90" from={addMonths({date:countingDate, y:5})} />
+                <TableRow rule="Citizenship-5Y" iter="1" quota="450" from={countingDate} span={5}/>
             </tbody>
         </>
     )

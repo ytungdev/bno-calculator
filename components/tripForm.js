@@ -11,8 +11,8 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import addData from "../firebase/db/addData";
 
 export default function TripForm(props) {
-    const {user, setUser, appUser} = useAuthContext()
-    console.log(user)    
+    const {user, setUser} = useAuthContext()
+    // console.log(user)    
 
     //initForm
     const enteringDateRef = React.useRef();
@@ -61,7 +61,10 @@ export default function TripForm(props) {
         const newDestination = tripDestinationRef.current.value
         const newFromDate = tripFromDateRef.current.value
         const newToDate = tripToDateRef.current.value
-        user.addTrip(newDestination,newFromDate,newToDate)
+        const appUser = new AppUser(user)
+        appUser.addTrip(newDestination,newFromDate,newToDate)
+        window.location.reload();
+
     }
 
     const Summary = () => {
