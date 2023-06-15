@@ -22,9 +22,9 @@ export function dateDiff(d2, d1) {
     if (typeof d1 === 'string' || d1 instanceof String) {
         d1 = new Date(d1)
     }
-    let diff = Math.floor((d2 - d1) / (1000 * 60 * 60 * 24))
-    // console.log(`dd : ${d2string}, ${d1string}`)
+    let diff = Math.floor((d2 - d1 - 1) / (1000 * 60 * 60 * 24))
     // return Math.abs(diff);
+
     return diff > 0 ? diff : 0
 }
 
