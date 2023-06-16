@@ -54,7 +54,9 @@ export default function TripList(props) {
 
     }
 
-
+    if(!user.initiated){
+        return(<></>)
+    }
     return (
         <>
             <div className={utilStyles.card}>
