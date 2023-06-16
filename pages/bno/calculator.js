@@ -32,15 +32,18 @@ import { getTrips } from '../../services/TripService'
 
 export default function calculatorPage(props) {
     const { user, setUser } = useAuthContext();
+    // console.log(tripState)
+
 
     return (
         <Layout>
             <Protected>
                 <h1>5 + 1 calculator</h1>
-                <TripForm />
+                <TripForm/>
+                <hr />
+                <TripList/>
                 <hr />
                 <TrackingTable />
-                <TripList />
             </Protected>
         </Layout>
     );

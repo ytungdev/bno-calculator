@@ -13,6 +13,7 @@ export const useAuthContext = () => React.useContext(AuthContext);
 
 export const AuthContextProvider = ({children}) => {
     const [user, setUser] = React.useState(null);
+    const [tripState,  setTripState] = React.useState([])
     const [loading, setLoading] = React.useState(true);
     let appUser;
 
@@ -23,8 +24,10 @@ export const AuthContextProvider = ({children}) => {
                 const {result, error} = await appUser.fetch()
                 //destructure AppUser class for setState
                 setUser({...appUser});
+                setTripState([...appUser.trips])
             } else {
                 setUser(null);
+                setTripState(null);
             }
             setLoading(false);
         });
@@ -32,7 +35,7 @@ export const AuthContextProvider = ({children}) => {
     }, []);
     
     return (
-        <AuthContext.Provider value={{ user, setUser, appUser }}>
+        <AuthContext.Provider value={{ user, setUser, tripState, setTripState }}>
             { loading ? <>Loading...</> :children }
         </AuthContext.Provider>
     );

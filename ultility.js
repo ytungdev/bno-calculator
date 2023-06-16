@@ -14,7 +14,12 @@ export function monthDiff(d2, d1) {
     return months > 0 ? months : 0
 }
 
-
+/**
+ * [calculate the days away under BNO calculation]
+ * @param  {[type]} d2  [The later date]
+ * @param  {[type]} d1  [The ealier date]
+ * @return {[number]}   [number of days counted as away]
+ */
 export function dateDiff(d2, d1) {
     if (typeof d2 === 'string' || d2 instanceof String) {
         d2 = new Date(d2)

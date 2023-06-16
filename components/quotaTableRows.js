@@ -9,7 +9,6 @@ export default function QuotaTableRows(props) {
     const { user, setUser } = useAuthContext()
     const countingDate = user.ilr.countingDate
     const trips = user.trips
-    console.log(trips)
 
     function format(data) {
         let tripDates = []
@@ -20,7 +19,7 @@ export default function QuotaTableRows(props) {
         return tripDates
     }
     let tripDates = format(trips)
-    console.log(tripDates)
+    // console.log(tripDates)
 
     const TableRow = ({ rule, iter, quota, from, span=1 }) => {
         let result = []

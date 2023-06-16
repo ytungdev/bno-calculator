@@ -31,10 +31,10 @@ export default function TrackingTable(props) {
         <>
             <div className={utilStyles.card}>
                 <table className={styles.table}>
-                    <Header th={['','start','end','progress','stat']} trClass={styles.pth} />
-                    <ProgressTableRows />
                     <Header th={['','start','end','quota','stat']} trClass={styles.qth} />
                     <QuotaTableRows />
+                    <Header th={['','start','end','progress','stat']} trClass={styles.pth} />
+                    <ProgressTableRows />
                 </table>
             </div>
         </>
