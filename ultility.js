@@ -76,3 +76,56 @@ export function overlapDays(b_start,b_end, t_start,t_end){
     }
     return 0
 }
+
+
+export function tripsRolling12(trips){
+    let tripList = []
+
+    trips.forEach((trip)=>{
+        const base1 = trip.from_date;
+        const base2 = addMonths({date:trip.from_date, m:12})
+        let accum = 0
+        let overlap = []
+        trips.forEach((test)=>{
+            const   b1 = new Date(base1),
+                    b2 = new Date(base2),
+                    t1 = new Date(test.from_date),
+                    t2 = new Date(test.to_date);
+            // console.log(`${b1}\n${b2}\n${t1}\n${t2}`)
+            const overlaps = overlapDays(b1, b2, t1, t2);
+            if (overlaps > 0){
+                overlap.push({...test});
+            }
+            accum += overlaps;
+        })
+
+        tripList.push({
+            tid:trip.tid,
+            from_date:base1,
+            to_date:base2,
+            accum:accum,
+            overlap:overlap
+        })
+    })
+
+
+    // const fromD = new Date(addMonths({date:from, y:i}))
+    // const toD = new Date(addMonths({date:from, y:i + span}))
+    // const total = quota
+    // let filled = 0
+
+    // tripDates.forEach(range => {
+    //     const b1 = fromD,
+    //         b2 = toD,
+    //         t1 = new Date(range.from),
+    //         t2 = new Date(range.to)
+    //     // console.log(`${b1}\n${b2}\n${t1}\n${t2}`)
+    //     let overlap = overlapDays(b1, b2, t1, t2)
+    //     // console.log(overlap)
+    //     filled += overlap
+
+    // });
+
+    return tripList
+
+}
