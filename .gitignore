@@ -3,10 +3,6 @@
 secret*
 .env
 
-# firebase
-.firebase*
-firebase*
-
 # dependencies
 /node_modules
 /.pnp
