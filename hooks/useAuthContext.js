@@ -1,5 +1,5 @@
 import React from 'react';
-import { onAuthStateChanged,getAuth} from 'firebase/auth';
+import { onAuthStateChanged, getAuth, currentUser } from 'firebase/auth';
 import firebase_app from '../firebase/config';
 import getData from '../firebase/db/getData';
 
@@ -11,9 +11,9 @@ export const AuthContext = React.createContext();
 
 export const useAuthContext = () => React.useContext(AuthContext);
 
-export const AuthContextProvider = ({children}) => {
+export const AuthContextProvider = ({ children }) => {
     const [user, setUser] = React.useState(null);
-    const [tripState,  setTripState] = React.useState([])
+    const [tripState, setTripState] = React.useState([])
     const [loading, setLoading] = React.useState(true);
     let appUser;
 
@@ -21,9 +21,9 @@ export const AuthContextProvider = ({children}) => {
         const unsubscribe = onAuthStateChanged(auth, async (guser) => {
             if (guser) {
                 appUser = new AppUser(guser)
-                const {result, error} = await appUser.fetch()
+                const { result, error } = await appUser.fetch()
                 //destructure AppUser class for setState
-                setUser({...appUser});
+                setUser({ ...appUser });
                 setTripState([...appUser.trips])
             } else {
                 setUser(null);
@@ -33,10 +33,10 @@ export const AuthContextProvider = ({children}) => {
         });
         return () => unsubscribe();
     }, []);
-    
+
     return (
         <AuthContext.Provider value={{ user, setUser, tripState, setTripState }}>
-            { loading ? <>Loading...</> :children }
+            {loading ? <>Loading...</> : children}
         </AuthContext.Provider>
     );
 };
