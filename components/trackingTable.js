@@ -13,7 +13,13 @@ export default function TrackingTable(props) {
     const Header = ({ th, trClass }) => {
         let ths = []
         for (let n in th){
-            ths.push(<th key={n}>{th[n]}</th>)
+            let res;
+            if (thSpan[n] == 1){
+                res = <th key={n} width={thWidth[n]}>{th[n]}</th>
+            } else {
+                res = <th key={n} width={thWidth[n]} colSpan={thSpan[n]}>{th[n]}</th>
+            }
+            ths.push(res)
         }
         return (<thead>
             <tr className={trClass}>
@@ -27,13 +33,16 @@ export default function TrackingTable(props) {
         return(<></>)
     }
 
+    const thSpan = [2,1,1,1,1,1]
+    const thWidth = ['25%','15%','15%','20%','15%','15%','5%']
+
     return (
         <>
             <div className={utilStyles.card}>
                 <table className={styles.table}>
-                    <Header th={['','start','end','quota','stat']} trClass={styles.qth} />
+                    <Header th={['','start','end','quota','stat', 'action']} trClass={styles.qth} />
                     <QuotaTableRows />
-                    <Header th={['','start','end','progress','stat']} trClass={styles.pth} />
+                    <Header th={['', 'start','end','progress','stat', 'action']} trClass={styles.pth} />
                     <ProgressTableRows />
                 </table>
             </div>

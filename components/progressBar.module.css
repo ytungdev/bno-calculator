@@ -44,6 +44,7 @@ span.progress {
     width: 0;
     /* background: #326666; */
     /* transition: all 2s; */
+    /* width: 100%; */
     animation-duration: 2s;
     animation-name: changeWidth;
     animation-iteration-count: 1;
