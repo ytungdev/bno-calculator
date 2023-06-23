@@ -69,3 +69,32 @@ span.progress {
     from {width: 0;}
     to {width: 100%;}
 }
+
+
+
+.highLx {
+    -webkit-animation: target-fade 3s;
+      -moz-animation: target-fade 3s;
+      -o-animation: target-fade 3s;
+      animation: target-fade 3s;
+  }
+  
+  @-webkit-keyframes target-fade {
+      from { background-color: rgb(201, 233, 255); } /* [1] */
+      to { background-color: transparent; }
+  }
+  
+  @-moz-keyframes target-fade {
+      from { background-color: rgb(201, 233, 255); } /* [1] */
+      to { background-color: transparent; }
+  }
+  
+  @-o-keyframes target-fade {
+      from { background-color: rgb(201, 233, 255); } /* [1] */
+      to { background-color: transparent; }
+  }
+  
+  @keyframes target-fade {
+      from { background-color: rgb(201, 233, 255); } /* [1] */
+      to { background-color: transparent; }
+  }

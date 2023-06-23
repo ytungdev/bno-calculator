@@ -1,3 +1,5 @@
+import React from 'react';
+
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from './layout.module.css';
@@ -11,9 +13,11 @@ import logout from '../firebase/auth/logout';
 
 export const siteTitle = 'Next.js Sample Website';
 
+export const HighLxContext = React.createContext();
 
 export default function Layout({ children, home }) {
   const { user, setUser } = useAuthContext();
+  const [highLx, setHighLx] = React.useState([])
   // console.log(`layout :`)
   // console.log(user)
 
@@ -69,7 +73,9 @@ export default function Layout({ children, home }) {
           </>
         )}
       </header>
-      <main>{children}</main>
+      <HighLxContext.Provider value={{ highLx, setHighLx }}>
+        <main>{children}</main>
+      </HighLxContext.Provider>
 
       {!home && (
         <div className={styles.backToHome}>

@@ -26,6 +26,84 @@ img {
   display: block;
 }
 
+ul {
+  margin: 5px;
+}
+
+/* Tooltip */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  left: 120%;
+}
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent black transparent transparent;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+:target {
+	-webkit-animation: target-fade 5s;
+	-moz-animation: target-fade 5s;
+	-o-animation: target-fade 5s;
+	animation: target-fade 5s;
+}
+
+.highLx {
+  -webkit-animation: target-fade 5s;
+	-moz-animation: target-fade 5s;
+	-o-animation: target-fade 5s;
+	animation: target-fade 5s;
+}
+
+@-webkit-keyframes target-fade {
+	from { background-color: yellow; } /* [1] */
+	to { background-color: transparent; }
+}
+
+@-moz-keyframes target-fade {
+	from { background-color: yellow; } /* [1] */
+	to { background-color: transparent; }
+}
+
+@-o-keyframes target-fade {
+	from { background-color: yellow; } /* [1] */
+	to { background-color: transparent; }
+}
+
+@keyframes target-fade {
+	from { background-color: yellow; } /* [1] */
+	to { background-color: transparent; }
+}
+
+.less-important{
+  color: rgb(165, 165, 165);
+}
+
+sup{
+  font-size: 0.5rem;
+}
 /* 
 @media (prefers-color-scheme: dark) {
   html {
