@@ -2,13 +2,17 @@ import React from "react";
 import styles from './gantt.module.css';
 import { monthDiff } from '../ultility'
 
-
+import { useAuthContext } from "../hooks/useAuthContext";
 
 export default function Gantt(props) {
-    const [issueDate, setIssueDate] = props.issueDateState
-    const [countingDate, setCountingDate] = props.countingDateState
-    const [visaType, setVisaType] = props.visaTypeState
-    const tripData = props.data
+
+    const { user, setUser } = useAuthContext()
+    const visaType =  user.visa.type
+    const issueDate = user.visa.issueDate
+    const countingDate = user.ilr.countingDate
+    const tripData = user.trips
+
+    console.log(countingDate)
 
     const issueDateD = new Date(issueDate);
     const countingDateD = new Date(countingDate);
