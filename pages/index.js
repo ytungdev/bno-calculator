@@ -177,7 +177,9 @@ export default function Home({ tripData }) {
                         user ?
                             <Link href="/bno/calculator">calculator</Link>
                             :
-                            <input type='button' id="signin-btn" value="Sign-in" onClick={signIn} />
+                            <div align="center">
+                                <input type='button' id="signin-btn" value="Sign-in" onClick={signIn} />
+                            </div>
                     )
                 }
             </Layout >

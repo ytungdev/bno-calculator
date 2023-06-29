@@ -21,6 +21,8 @@
     text-align: left;
     background-color: #7f9e93;
     color: white;
+    text-transform: capitalize;
+    text-align: center;
 }
 
 .qth th {
@@ -29,6 +31,8 @@
     text-align: left;
     background-color: #9e817f;
     color: white;
+    text-transform: capitalize;
+    text-align: center;
 }
 
 .container {

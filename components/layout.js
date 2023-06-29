@@ -85,7 +85,9 @@ export default function Layout({ children, home }) {
       <section id="signin">
         {(
           user ?
-            <input type='button' id="signin-btn" value="Sign-out" onClick={logout} />
+            <div align="center">
+              <input type='button' id="signin-btn" value="Sign-out" onClick={logout} />
+            </div>
             :
             <></>
         )}
