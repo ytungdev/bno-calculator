@@ -8,6 +8,14 @@ import signIn from '../firebase/auth/login';
 
 export default function Home({ tripData }) {
     const { user } = useAuthContext()
+
+    const  doSignIn = async() => {
+        const success = await signIn()
+        if (success){
+            window.location.replace('/bno/calculator')
+        }
+    }
+
     return (
         <>
             <Layout home>
@@ -171,14 +179,13 @@ export default function Home({ tripData }) {
                 <br />
                 <br />
 
-
                 {
                     (
                         user ?
-                            <Link href="/bno/calculator">calculator</Link>
+                            <Link href="/bno/calculator">calculator</Link>                            
                             :
                             <div align="center">
-                                <input type='button' id="signin-btn" value="Sign-in" onClick={signIn} />
+                                <input type='button' id="signin-btn" value="Sign-in" onClick={doSignIn} />
                             </div>
                     )
                 }
